@@ -1,9 +1,10 @@
-
 [versions]
 koin-version = "3.5.6"
 kotlin-version = "2.1.0"
 ktor-version = "3.0.3"
 logback-version = "1.4.14"
+kotlinxSerializationJson = "1.7.3"
+googlePlayIntegrity = "v1-rev20241127-2.0.0"
 
 [libraries]
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin-version" }
@@ -16,6 +17,9 @@ logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "lo
 ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor-version" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-version" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
+
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+google-play-integrity = { group = "com.google.apis", name = "google-api-services-playintegrity", version.ref = "googlePlayIntegrity" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
