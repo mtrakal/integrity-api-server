@@ -7,8 +7,8 @@
 - [Play Integrity Documentation](https://developer.android.com/google/play/integrity/overview)
 - Enable API in Cloud Console - [Google Play Integrity API](https://console.cloud.google.com/apis/library/playintegrity.googleapis.com)
 - Enable API in Google Play console - [Select app](https://play.google.com/console/u/0/developers/) > Test and release > App integrity
-- Create a service account in Cloud console and his service ket (JSON) is stored in `.private/` folder 
-- Edit [Config.kt](./src/main/kotlin/Config.kt) to provide proper service account key path
+- Create a service account in Cloud console and his service key (JSON) store into `.private/` folder.
+- Edit [Config.kt](./src/main/kotlin/Config.kt) to provide proper service account key path.
 - Run this project webserver
 - Implement Android FE part 🤖
 ---
@@ -16,6 +16,24 @@
 ## Backend part
 
 - Uses [backend Google Play Integrity API](https://github.com/googleapis/google-api-java-client-services/tree/main/clients/google-api-services-playintegrity/v1) dependency
+
+---
+
+## Android part
+
+- Obtain Token from Integrity API SDK (as described in [Play Integrity Documentation](https://developer.android.com/google/play/integrity/standard)) 
+- call `POST http://[THIS-SERVER:8080]/play/integrity/all` and add `IntegrityQuery` as body. Into this body just put token taken from SDK.
+
+
+```kotlin
+@Serializable
+data class IntegrityQuery(
+    @SerialName("token")
+    val token: String,
+)
+```
+
+Response will contains json with content of [TokenPayloadExternal](https://googleapis.dev/java/google-api-services-playintegrity/latest/index.html?com/google/api/services/playintegrity/v1/model/TokenPayloadExternal.html)
 
 ---
 

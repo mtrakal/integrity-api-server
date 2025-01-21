@@ -7,6 +7,7 @@ import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.JsonFactory
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.playintegrity.v1.PlayIntegrityRequestInitializer
+import com.google.api.services.playintegrity.v1.PlayIntegrityScopes
 import com.google.api.services.playintegrity.v1.model.DecodeIntegrityTokenRequest
 import com.google.auth.Credentials
 import com.google.auth.http.HttpCredentialsAdapter
@@ -29,6 +30,10 @@ val koinModules: Module = module {
     single<ApplicationName> { ApplicationName(Config.APPLICATION_NAME) }
     single<PackageName> { PackageName(Config.PACKAGE_NAME) }
     factory<DecodeIntegrityTokenRequest> { DecodeIntegrityTokenRequest() }
-    single<Credentials> { GoogleCredentials.fromStream(FileInputStream(Config.SERVICE_ACCOUNT_FILE_PATH)) }
+    single<Credentials> {
+        GoogleCredentials
+            .fromStream(FileInputStream(Config.SERVICE_ACCOUNT_FILE_PATH))
+            .createScoped(PlayIntegrityScopes.PLAYINTEGRITY)
+    }
     factory<HttpRequestInitializer> { HttpCredentialsAdapter(get()) }
 }
